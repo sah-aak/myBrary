@@ -8,15 +8,16 @@ const app= express();
 const expressLayouts= require('express-ejs-layouts');
 const bodyParser=require('body-parser');
 
-app.set('view engine','ejs');
-app.set('views',__dirname+'/views');
-app.set('layouts','layouts/layout');    //to set a same layout for all pages eg: header & footer
-app.use(expressLayouts);
-app.use(express.static('public'));  //for static files
-
 const indexRouter=require('./routes/index');
 const authorRouter=require('./routes/author');
 const bookRouter=require('./routes/book');
+
+app.set('view engine','ejs');
+app.set('views',__dirname+'/views');
+app.set('layout','layouts/layout');    //to set a same layout for all pages eg: header & footer
+app.use(expressLayouts);
+app.use(express.static('public'));  //for static files
+
 
 const mongoose=require('mongoose');
 mongoose.connect(process.env.DATABASE_URL,{ useNewUrlParser:true,useUnifiedTopology: true });//useNewUrlParser is needed as mongoose by default an older parser which is now deprecated.
